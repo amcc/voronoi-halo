@@ -1,0 +1,139 @@
+:root {
+  --size: 95;
+  --margin: 10;
+}
+
+/* min width media query */
+@media (min-width: 600px) {
+  :root {
+    --size: 100;
+    --margin: 0;
+  }
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+
+  font-family: "IBM Plex Mono", sans-serif;
+  font-weight: 300;
+  background-color: black;
+  color: white;
+}
+
+a {
+  color: white;
+}
+
+label {
+  display: block;
+}
+section {
+  /* padding-bottom: 2em; */
+}
+
+#depth,
+#area,
+#colour-range,
+button {
+  width: calc(
+    min(calc(var(--size) * 0.5vw), calc(var(--size) * 0.5vh)) -
+      calc(var(--margin) * 2px)
+  );
+  /* width: 100%; */
+}
+.full-width {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+#slider {
+  width: 90vw;
+  margin: calc(var(--margin) * 2px);
+}
+#slice {
+  /* width: 100vw; */
+  /* padding: calc(var(--margin) * 1px); */
+}
+/* Scale canvas with resize attribute to full size */
+.container {
+  width: 100%;
+  height: 100vh;
+  /* padding-top: 2vh; */
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-around;
+  align-items: center;
+  gap: 3vh;
+}
+.controls {
+  max-width: 40vh;
+}
+.controls > div {
+  margin-bottom: 4vh;
+}
+
+button {
+  font-family: "IBM Plex Mono", sans-serif;
+  background-color: black;
+
+  padding: 2px;
+  border-radius: 0.5em;
+  margin-top: 0.5em;
+  color: white;
+  /* outline: white; */
+  border: 1px solid white;
+}
+button:hover {
+  background-color: white;
+  color: black;
+}
+.text-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+}
+.text-area {
+  max-width: min(calc(var(--size) * 1vw), calc(var(--size) * 1vh));
+  padding: calc(var(--margin) * 1px);
+}
+canvas[resize] {
+  /* width: 100%;
+  height: 100%; */
+  width: min(calc(var(--size) * 1vw), calc(var(--size) * 1vh));
+  height: min(calc(var(--size) * 1vw), calc(var(--size) * 1vh));
+  /* max-width: 100vw; */
+  /* max-height: 70.714vw; */
+
+  /* width: 1123px;
+  height: 1587px; */
+}
+#image {
+  display: none;
+}
+
+#info {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 2rem;
+  font-size: 1rem;
+}
+#info a {
+  color: gray;
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

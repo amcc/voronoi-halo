@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dark Matter Voronoi</title>
+    <meta
+      name="description"
+      content="Animating through Voronoi patterns from galaxies and quasars using the Sloan Large Sky Survey data"
+    />
+    <meta charset="utf-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta
+      name="viewport"
+      content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <!-- Load the Voronoi library from here: https://github.com/gorhill/Javascript-Voronoi -->
+    <script type="text/javascript" src="js/rhill-voronoi-core.min.js"></script>
+    <!-- Get PapaParse library -->
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
+    <!-- Load the Paper.js library -->
+    <script type="text/javascript" src="js/paper.js"></script>
+    <!-- Load external PaperScript and associate it with myCanvas -->
+    <script
+      type="text/javascript"
+      src="js/sketch.js"
+      canvas="myCanvas"
+      hidpi="off"
+    ></script>
+  </head>
+  <body>
+    <div>
+      <div class="full-width">
+        <div>
+          <label for="slider"
+            >z / red-shift position:
+            <input
+              id="start-number"
+              type="number"
+              value="0.7934"
+              min="0.001"
+              max="1.5"
+              step="0.0001"
+          /></label>
+
+          <input
+            type="range"
+            id="slider"
+            value="0.7934"
+            min="0.001"
+            max="1.5"
+            step="0.0001"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <section class="controls">
+        <div id="slice">
+          <label for="depth"
+            >slice depth:
+            <input
+              id="depth-number"
+              type="number"
+              value="0.052"
+              min="0.001"
+              max="1"
+              step="0.001"
+          /></label>
+          <input
+            type="range"
+            id="depth"
+            value="0.052"
+            min="0.001"
+            max="1"
+            step="0.001"
+          />
+        </div>
+
+        <div id="colour">
+          <label for="colour-range"
+            >colour range depth:
+            <input
+              id="colour-range-number"
+              type="number"
+              value="70"
+              min="0"
+              max="200"
+              step="0.1"
+          /></label>
+          <input
+            type="range"
+            id="colour-range"
+            value="70"
+            min="0"
+            max="200"
+            step="0.1"
+          />
+        </div>
+
+        <div>
+          <label for="area"
+            >reduce by area:
+            <input
+              id="area-number"
+              type="number"
+              value="200"
+              min="0"
+              max="200"
+              step="0.1"
+          /></label>
+
+          <input
+            type="range"
+            id="area"
+            value="200"
+            min="0"
+            max="200"
+            step="0.1"
+          />
+        </div>
+        <button id="galaxy-positions">Galaxy Positions off</button>
+        <button id="animation">Start animation</button>
+      </section>
+      <section>
+        <canvas id="myCanvas" resize></canvas>
+      </section>
+    </div>
+    <div class="text-container">
+      <div class="text-area">
+        <section>
+          <p>
+            This diagram shows a Voronoi pattern using a set of galaxies and
+            quasars from the Sloan Large Sky Survey. The sliders control the "z"
+            position of a slice through a section of the universe. Imagine
+            travelling out through space and looking at the galaxies and quasars
+            around you in that area.
+          </p>
+          <p>
+            The first slider controls the thickness of the slice, the bigger the
+            number the thicker the area you are looking at.
+          </p>
+          <p>
+            The second slider is the distance into the universe, technically its
+            the "red shift" number.
+          </p>
+          <p>
+            The third slider changes the maximum area a cell is allowed to be.
+            By reducing this number cells are excluded, this helps highlight the
+            dark matter by removing cells away from clusters.
+          </p>
+          <p>
+            Imagine a cylinder that extends into space, the first slider is the
+            length of that cylinder, the second slider is how far you're pushing
+            that cylinder out into space.
+          </p>
+        </section>
+        <section>
+          <p>Each circle is a galaxy.</p>
+          <p>
+            The pattern of lines is a Voronoi diagram, a set of cells each of
+            which defines an area that is closest to one of the galaxies or
+            quasars.
+          </p>
+          <p>
+            Voronoi patterns help to show collections of dark matter, the
+            smaller the cells the more dark matter. It is the dark matter that
+            attracts normal matter and forms the structure of the universe. As
+            the cells get smaller they've been coloured to help show the
+            concentration of dark matter.
+          </p>
+        </section>
+        <p>
+          The data is from this website
+          <a
+            href="http://voyages.sdss.org/launch/milky-way/sdss-constellations/discovering-constellations-using-sdss-plates/"
+            target="_blank"
+            >vages.sdss.org</a
+          >
+          <br />
+          the plate is 10475
+          <br />
+          You can enter the query below into the SDSS query tool to get the data
+        </p>
+        <p>
+          <code>
+            select top 1000 spa.ra, spa.dec, spa.dered_r as magnitude,
+            spa.class, spa.z, soa.xfocal as x, soa.yfocal as y <br />
+            from specphotoAll as spa<br />
+            join specObjAll as soa on soa.specObjID = spa.specObjID<br />
+            where spa.plate = 10475 <br />and spa.dered_r > 0 <br />order by
+            spa.dered_r asc
+          </code>
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
