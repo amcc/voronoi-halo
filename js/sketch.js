@@ -32,7 +32,7 @@ let speed = 0.001;
 let animating = false;
 let galaxyPositions = false;
 
-let stroke = "#333333";
+let stroke = "#000000";
 let circle = "white";
 let circleSize = 2;
 let starFontsize = 5;
@@ -285,11 +285,7 @@ window.onload = function () {
               const rootArea = Math.sqrt(cellPath.bounds.area);
 
               let grey = mapRange(rootArea, 0, colourVal, 0, 1);
-              cellPath.fillColor = new Color(
-                1 - grey * 2,
-                1 - grey * 5,
-                1 - grey
-              );
+              cellPath.fillColor = new Color(grey * 3, grey * 1, grey * 5);
               if (rootArea > area) {
                 cellPath.visible = false;
               } else {
@@ -334,6 +330,7 @@ window.onload = function () {
       center: [point.x, point.y],
       radius: circleSize,
       fillColor: circleColor,
+      strokeColor: strokeColor,
       parent: starGroup,
       // selected: true,
     });
@@ -345,7 +342,7 @@ window.onload = function () {
       starText.fontFamily = "sans-serif";
       starText.justification = "left";
       starText.fontSize = starFontsize;
-      starText.fillColor = circleColor;
+      starText.fillColor = strokeColor;
       starText.parent = starGroup;
       starText.content =
         Number(data[i].rag).toFixed(3) +
