@@ -6,7 +6,7 @@
 /* min width media query */
 @media (min-width: 600px) {
   :root {
-    --size: 100;
+    /* --size: 99; */
     --margin: 0;
   }
 }
@@ -21,6 +21,8 @@ body {
   font-weight: 300;
   background-color: rgb(255, 255, 255);
   color: black;
+
+  font-size: 16px;
 }
 
 a {
@@ -34,25 +36,26 @@ section {
   /* padding-bottom: 2em; */
 }
 
+#slider,
 #depth,
 #area,
 #colour-range,
 button {
-  width: calc(
+  /* width: calc(
     min(calc(var(--size) * 0.5vw), calc(var(--size) * 0.5vh)) -
       calc(var(--margin) * 2px)
-  );
-  /* width: 100%; */
+  ); */
+  width: 100%;
 }
 .full-width {
   padding: 10px;
   display: flex;
   justify-content: center;
 }
-#slider {
+/* #slider {
   width: 90vw;
   margin: calc(var(--margin) * 2px);
-}
+} */
 #slice {
   /* width: 100vw; */
   /* padding: calc(var(--margin) * 1px); */
@@ -60,16 +63,25 @@ button {
 /* Scale canvas with resize attribute to full size */
 .container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   /* padding-top: 2vh; */
   display: flex;
+  /* flex-wrap: wrap; */
   /* flex-direction: column; */
   justify-content: space-around;
-  align-items: center;
+  align-items: left;
   gap: 3vh;
+}
+@media screen and (max-width: 992px) {
+  .container {
+    flex-wrap: wrap;
+  }
 }
 .controls {
   max-width: 40vh;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
 }
 .controls > div {
   margin-bottom: 4vh;
@@ -99,11 +111,11 @@ button:hover {
   display: flex;
   flex-direction: column;
   justify-content: top;
-  align-items: center;
+  align-items: left;
 }
 .text-area {
   max-width: min(calc(var(--size) * 1vw), calc(var(--size) * 1vh));
-  padding: calc(var(--margin) * 1px);
+  padding: 20px;
 }
 canvas[resize] {
   /* width: 100%;
