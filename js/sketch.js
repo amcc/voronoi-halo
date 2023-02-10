@@ -54,6 +54,7 @@ window.onload = function () {
   const areaNumber = document.querySelector("#area-number");
   const colourRangeSlider = document.querySelector("#colour-range");
   const colourRangeNumber = document.querySelector("#colour-range-number");
+  const saveButton = document.querySelector("#save");
 
   zStart = Number(localStorage.getItem("zStart")) || Number(zSlider.value);
   zDepth = Number(localStorage.getItem("zDepth")) || Number(depthSlider.value);
@@ -91,6 +92,12 @@ window.onload = function () {
 
   colourRangeSlider.addEventListener("input", (event) => {
     colourEvent(event);
+  });
+
+  console.log(saveButton);
+  saveButton.addEventListener("click", (event) => {
+    // console.log("save");
+    print();
   });
 
   const animationControl = document.querySelector("#animation");
@@ -294,8 +301,12 @@ window.onload = function () {
               veronoiGroup.addChild(cellPath);
               const rootArea = Math.sqrt(cellPath.bounds.area);
 
-              let grey = mapRange(rootArea, 0, colourVal, 0, 1);
-              cellPath.fillColor = new Color(grey * 3, grey * 1, grey * 5);
+              let colour = mapRange(rootArea, 0, colourVal, 0, 1);
+              cellPath.fillColor = new Color(
+                colour * 2,
+                colour * 2,
+                colour * 5
+              );
               if (rootArea > area) {
                 cellPath.visible = false;
               } else {
