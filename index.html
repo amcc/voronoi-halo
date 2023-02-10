@@ -41,7 +41,7 @@
     <div class="container">
       <section class="controls">
         <div class="controls-inner">
-          <h1>Voronoi Halo</h1>
+          <h1>Voronoi Halo: explorer</h1>
           <div>
             <label for="slider"
               >z / red-shift position:
@@ -138,7 +138,17 @@
     <div class="text-container">
       <div class="text-area">
         <section>
-          <p><em>Voronoi Halo</em> is an artwork by Alistair McClymont in collaboration with the cosmologist Dr. Rita Tojeiro. This website is a tool that McClymont created using data shared by Dr. Tojeiro, <a href="https://alistairmcclymont.com/artwork/voronoi-halo">the artwork itself can be found here</a></p</p>
+          <h2>About the artwork</h2>
+          <p>
+            <em>Voronoi Halo</em> is an artwork by Alistair McClymont in
+            collaboration with the cosmologist Dr. Rita Tojeiro. This website is
+            a tool that McClymont created using data shared by Dr. Tojeiro,
+            <a href="https://alistairmcclymont.com/artwork/voronoi-halo"
+              >the artwork itself can be found here.
+            </a>
+          </p>
+
+          <h2>How this tool works</h2>
           <p>
             This diagram shows a Voronoi pattern using a set of galaxies and
             quasars from the Sloan Large Sky Survey. The sliders control the "z"
@@ -147,31 +157,34 @@
             around you in that area.
           </p>
           <p>
-            The first slider controls the thickness of the slice, the bigger the
-            number the thicker the area you are looking at.
-          </p>
-          <p>
-            The second slider is the distance into the universe, technically its
-            the "red shift" number.
-          </p>
-          <p>
-            The third slider changes the maximum area a cell is allowed to be.
-            By reducing this number cells are excluded, this helps highlight the
-            dark matter by removing cells away from clusters.
-          </p>
-          <p>
             Imagine a cylinder that extends into space, the first slider is the
             length of that cylinder, the second slider is how far you're pushing
             that cylinder out into space.
           </p>
+          <ul>
+            <li>
+              The first slider controls the thickness of the slice, the bigger
+              the number the thicker the area you are looking at.
+            </li>
+            <li>
+              The second slider is the distance into the universe, technically
+              its the "red shift" number.
+            </li>
+            <li>
+              The third slider changes the maximum area a cell is allowed to be.
+              By reducing this number cells are excluded, this helps highlight
+              the dark matter by removing cells away from clusters.
+            </li>
+          </ul>
         </section>
         <section>
-          <p>Each circle is a galaxy.</p>
+          <h2>What is the diagram</h2>
           <p>
             The pattern of lines is a Voronoi diagram, a set of cells each of
             which defines an area that is closest to one of the galaxies or
-            quasars.
+            quasars, each galaxy is represented by a circle.
           </p>
+
           <p>
             Voronoi patterns help to show collections of dark matter, the
             smaller the cells the more dark matter. It is the dark matter that
@@ -180,28 +193,37 @@
             concentration of dark matter.
           </p>
         </section>
-        <p>
-          The data is from this website
-          <a
-            href="http://voyages.sdss.org/launch/milky-way/sdss-constellations/discovering-constellations-using-sdss-plates/"
-            target="_blank"
-            >vages.sdss.org</a
+        <section>
+          <h2>The data</h2>
+          <p>
+            The data is from this website
+            <a
+              href="http://voyages.sdss.org/launch/milky-way/sdss-constellations/discovering-constellations-using-sdss-plates/"
+              target="_blank"
+              >vages.sdss.org</a
+            >
+            <br />
+            the plate is 10475
+            <br />
+            You can enter the query below into the SDSS query tool to get the
+            data
+          </p>
+          <p>
+            <code>
+              select top 1000 spa.ra, spa.dec, spa.dered_r as magnitude,
+              spa.class, spa.z, soa.xfocal as x, soa.yfocal as y <br />
+              from specphotoAll as spa<br />
+              join specObjAll as soa on soa.specObjID = spa.specObjID<br />
+              where spa.plate = 10475 <br />and spa.dered_r > 0 <br />order by
+              spa.dered_r asc
+            </code>
+          </p>
+        </section>
+        <footer>
+          <a href="https://alistairmcclymont.com"
+            >Go to alistairmcclymont.com</a
           >
-          <br />
-          the plate is 10475
-          <br />
-          You can enter the query below into the SDSS query tool to get the data
-        </p>
-        <p>
-          <code>
-            select top 1000 spa.ra, spa.dec, spa.dered_r as magnitude,
-            spa.class, spa.z, soa.xfocal as x, soa.yfocal as y <br />
-            from specphotoAll as spa<br />
-            join specObjAll as soa on soa.specObjID = spa.specObjID<br />
-            where spa.plate = 10475 <br />and spa.dered_r > 0 <br />order by
-            spa.dered_r asc
-          </code>
-        </p>
+        </footer>
       </div>
     </div>
   </body>

@@ -25,6 +25,14 @@ body {
   font-size: 16px;
 }
 
+footer {
+  border-top: 1px solid black;
+  padding: 1em;
+  margin: 2em 0;
+}
+h2 {
+  margin-top: 2em;
+}
 a {
   color: black;
 }
@@ -151,4 +159,8 @@ canvas[resize] {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+code {
+  color: blue;
 }
