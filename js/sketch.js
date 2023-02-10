@@ -35,7 +35,7 @@ let galaxyPositions = false;
 let stroke = "#000000";
 let circle = "white";
 let circleSize = 2;
-let starFontsize = 5;
+let starFontsize = 10;
 
 // get data from galaxies
 // http://voyages.sdss.org/launch/milky-way/sdss-constellations/discovering-constellations-using-sdss-plates/
@@ -61,7 +61,7 @@ window.onload = function () {
   colourVal =
     Number(localStorage.getItem("colourVal")) ||
     Number(colourRangeSlider.value);
-  console.log(zStart, zDepth, colourVal, area);
+  // console.log(zStart, zDepth, colourVal, area);
 
   // set the values
   zSlider.value = startNumber.value = zStart;
@@ -107,8 +107,8 @@ window.onload = function () {
     galaxyPositions = !galaxyPositions;
 
     galaxyPositions
-      ? (event.target.textContent = "Galaxy Positions on")
-      : (event.target.textContent = "Galaxy Positions off");
+      ? (event.target.textContent = "Galaxy Positions off")
+      : (event.target.textContent = "Galaxy Positions on");
   });
 
   depthSlider.value = zDepth;
@@ -173,7 +173,7 @@ window.onload = function () {
   ///////////////////////
 
   let voronoi = new Voronoi();
-  let sites, diagram;
+  let sites, sitesInformation, diagram;
   let bbox;
   let oldSize = paper.view.size;
   let strokeColor = new Color(stroke);
@@ -196,6 +196,8 @@ window.onload = function () {
       // console.log("xes", Math.max(...xes));
 
       data = results.data;
+
+      // console.log(data);
       gotData();
     },
   });
@@ -207,7 +209,10 @@ window.onload = function () {
       yt: margin,
       yb: height - margin,
     };
+
+    sitesInformation = filterData(data);
     sites = generatePoints(data);
+    // console.log("sites", sites, "sitesinfo", sitesInformation);
 
     // for (let i = 0, l = sites.length; i < l; i++) {
     //   sites[i] = sites[i].multiply(view.size).divide(oldSize);
@@ -217,12 +222,17 @@ window.onload = function () {
     // sites.forEach((site) => makeStar(site));
   }
 
-  function generatePoints(points) {
-    let sites = points.reduce((acc, curr) => {
-      // new Point(Math.floor(Math.abs(point.x)), Math.floor(Math.abs(point.y)))
-
-      //remove stars
-
+  function filterData(data) {
+    let newData = data.reduce((acc, curr) => {
+      if (curr.class !== "STAR" && zRange(curr.z)) {
+        acc.push(curr);
+      }
+      return acc;
+    }, []);
+    return newData;
+  }
+  function generatePoints(data) {
+    let sites = data.reduce((acc, curr) => {
       if (curr.class !== "STAR" && zRange(curr.z)) {
         acc.push(
           new Point(
@@ -345,9 +355,9 @@ window.onload = function () {
       starText.fillColor = strokeColor;
       starText.parent = starGroup;
       starText.content =
-        Number(data[i].rag).toFixed(3) +
+        Number(sitesInformation[i].rag).toFixed(3) +
         " / " +
-        Number(data[i].decg).toFixed(3);
+        Number(sitesInformation[i].decg).toFixed(3);
     }
 
     // console.log(point);
