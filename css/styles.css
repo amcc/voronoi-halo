@@ -80,16 +80,20 @@ button {
   align-items: left;
   gap: 3vh;
 }
-@media screen and (max-width: 992px) {
-  .container {
-    flex-wrap: wrap;
-  }
-}
+
 .controls {
   max-width: 40vh;
   padding-left: 20px;
   display: flex;
   align-items: center;
+}
+@media screen and (max-width: 992px) {
+  .container {
+    flex-wrap: wrap;
+  }
+  .controls {
+    padding: 0px 10px;
+  }
 }
 .controls > div {
   margin-bottom: 4vh;

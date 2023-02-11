@@ -94,7 +94,6 @@ window.onload = function () {
     colourEvent(event);
   });
 
-  console.log(saveButton);
   saveButton.addEventListener("click", (event) => {
     // console.log("save");
     print();
@@ -103,11 +102,7 @@ window.onload = function () {
   const animationControl = document.querySelector("#animation");
   const galaxyPositionsControl = document.querySelector("#galaxy-positions");
   animationControl.addEventListener("click", (event) => {
-    animating = !animating;
-
-    animating
-      ? (event.target.textContent = "Stop animation")
-      : (event.target.textContent = "Start animation");
+    toggleAnimation();
   });
 
   galaxyPositionsControl.addEventListener("click", (event) => {
@@ -120,13 +115,24 @@ window.onload = function () {
 
   depthSlider.value = zDepth;
 
+  function toggleAnimation(bool = null) {
+    if (bool === null) {
+      animating = !animating;
+    } else {
+      animating = bool;
+    }
+    animating
+      ? (animationControl.textContent = "Stop animation")
+      : (animationControl.textContent = "Start animation");
+  }
+
   function redShiftEvent(event) {
     const eVal = event.target.value;
     zStart = Number(eVal);
     startNumber.value = eVal;
     localStorage.setItem("zStart", zStart);
 
-    animating = false;
+    toggleAnimation(false);
   }
 
   function depthEvent(event) {
@@ -134,7 +140,7 @@ window.onload = function () {
     zDepth = Number(eVal);
     depthNumber.value = eVal;
     localStorage.setItem("zDepth", zDepth);
-    animating = false;
+    toggleAnimation(false);
   }
 
   function areaEvent(event) {
@@ -142,7 +148,7 @@ window.onload = function () {
     area = Number(eVal);
     areaNumber.value = eVal;
     localStorage.setItem("area", area);
-    animating = false;
+    toggleAnimation(false);
   }
 
   function colourEvent(event) {
@@ -150,7 +156,7 @@ window.onload = function () {
     colourVal = Number(eVal);
     colourRangeNumber.value = eVal;
     localStorage.setItem("colourVal", colourVal);
-    animating = false;
+    toggleAnimation(false);
   }
 
   // timelimit
