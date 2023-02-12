@@ -20,21 +20,22 @@ body {
   font-family: "IBM Plex Mono", sans-serif;
   font-weight: 300;
   background-color: rgb(255, 255, 255);
+  background-color: rgb(13, 47, 159);
   color: black;
-
+  color: white;
   font-size: 16px;
 }
 
 footer {
   border-top: 1px solid black;
-  padding: 1em;
+  padding: 1em 0;
   margin: 2em 0;
 }
 h2 {
   margin-top: 2em;
 }
 a {
-  color: black;
+  color: white;
 }
 
 label {
@@ -166,5 +167,5 @@ canvas[resize] {
 }
 
 code {
-  color: blue;
+  color: rgb(0, 255, 128);
 }

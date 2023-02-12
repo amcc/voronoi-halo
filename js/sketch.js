@@ -32,8 +32,8 @@ let speed = 0.001;
 let animating = false;
 let galaxyPositions = false;
 
-let stroke = "#000000";
-let circle = "white";
+let stroke = "#ffffff";
+let circle = "rgb(13, 47, 159)";
 let circleSize = 2;
 let starFontsize = 10;
 
@@ -307,7 +307,7 @@ window.onload = function () {
               veronoiGroup.addChild(cellPath);
               const rootArea = Math.sqrt(cellPath.bounds.area);
 
-              let colour = mapRange(rootArea, 0, colourVal, 0, 1);
+              let colour = mapRange(rootArea, 0, colourVal, 1, 0);
               cellPath.fillColor = new Color(
                 colour * 2,
                 colour * 2,
